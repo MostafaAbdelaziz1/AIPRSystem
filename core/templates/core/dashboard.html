@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+    {% load static %}
+<div class="student-dashboard">
+    <h2>Welcome, {{ student.username }}</h2>
+
+    <div class="student-info">
+        <h3>Your Information</h3>
+        <ul>
+            <li><strong>Full Name:</strong> {{ student.first_name }} {{ student.last_name }}</li>
+            <li><strong>Email:</strong> {{ student.email }}</li>
+            <li><strong>Username:</strong> {{ student.username }}</li>
+            <li><strong>Phone:</strong> {{ student_profile.phone_number }}</li>
+            <li><strong>Date of Birth:</strong> {{ student_profile.date_of_birth }}</li>
+            <li><strong>CGPA:</strong> {{ student_profile.cgpa }}</li>
+        </ul>
+    </div>
+
+    <div class="student-courses">
+        <h3>Your Courses</h3>
+        <ul>
+            {% for course in student_profile.courses.all %}
+                <li>{{ course.name }}</li>
+            {% empty %}
+                <li>No courses enrolled.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

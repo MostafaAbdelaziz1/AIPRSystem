@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Registration System</title>
+    <!-- Link to your CSS file -->
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+</head>
+
+<body>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+                {% if user.user_type == 1 %}
+                    <!-- HOD Navbar -->
+                    <li><a href="{% url 'hod_home' %}">HOD Home</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% elif user.user_type == 2 %}
+                    <!-- Student Navbar -->
+                    <li><a href="{% url 'student_home' %}">Student Home</a></li>
+                    <li><a href="{% url 'student_dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+            {% else %}
+                <!-- Guest Navbar -->
+                <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+        <!-- Specific content from child templates will be inserted here -->
+        {% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; AI Registration System</p>
+    </footer>
+
+    <!-- Link to your JS file -->
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+
+</html>
